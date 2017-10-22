@@ -12,9 +12,11 @@ namespace ShopDemoAPI.Model.Models
     public class ORDERDETAIL
     {
         [Key]
+        [Column(Order = 1)]
         public int ID_ORDER { get; set; }
 
         [Key]
+        [Column(Order = 2)]
         public int ID_PRODUCT { get; set; }
 
         [Required]

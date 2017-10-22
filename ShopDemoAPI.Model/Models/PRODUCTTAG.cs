@@ -12,11 +12,12 @@ namespace ShopDemoAPI.Model.Models
     public class PRODUCTTAG
     {
         [Key]
+        [Column(Order = 1)]
         public int ID_PRODUCT { get; set; }
 
         [Key]
         [MaxLength(50)]
-        [Column(TypeName = "varchar")]
+        [Column(TypeName = "varchar", Order = 2)]
         public string ID_TAG { get; set; }
 
         [ForeignKey("ID_PRODUCT")]
