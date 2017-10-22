@@ -8,7 +8,7 @@
         {
             return dbContext ?? (dbContext = new ShopDemoAPIDbContext());
         }
-
+        
         protected override void DisposeCore()
         {
             if (dbContext != null)
