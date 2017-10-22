@@ -31,7 +31,8 @@ namespace ShopDemoAPI.Model.Models
         [MaxLength(500)]
         public string IMAGE { get; set; }
 
-        public XElement MOREIMAGES { get; set; }
+        [Column(TypeName = "xml")]
+        public string MOREIMAGES { get; set; }
         
         public decimal PRICE { get; set; }
 

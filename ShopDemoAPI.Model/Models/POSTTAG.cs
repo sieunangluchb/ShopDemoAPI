@@ -12,11 +12,12 @@ namespace ShopDemoAPI.Model.Models
     public class POSTTAG
     {
         [Key]
+        [Column(Order = 1)]
         public int ID_POST { get; set; }
 
         [Key]
         [MaxLength(50)]
-        [Column(TypeName = "varchar")]
+        [Column(TypeName = "varchar", Order = 2)]
         public string ID_TAG { get; set; }
 
         [ForeignKey("ID_POST")]
