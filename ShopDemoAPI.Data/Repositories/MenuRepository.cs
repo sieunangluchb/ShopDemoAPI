@@ -3,11 +3,11 @@ using ShopDemoAPI.Model.Models;
 
 namespace ShopDemoAPI.Data.Repositories
 {
-    public interface IMenuRepository
+    public interface IMenuRepository : IRepository<MENU>
     {
     }
 
-    public class MenuRepository : RepositoryBase<MENU>, IMenuGroupRepository
+    public class MenuRepository : RepositoryBase<MENU>, IMenuRepository
     {
         public MenuRepository(IDbFactory dbFactory) : base(dbFactory)
         {

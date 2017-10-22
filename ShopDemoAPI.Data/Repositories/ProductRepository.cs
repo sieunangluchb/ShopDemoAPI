@@ -3,7 +3,7 @@ using ShopDemoAPI.Model.Models;
 
 namespace ShopDemoAPI.Data.Repositories
 {
-    public interface IProductRepository
+    public interface IProductRepository : IRepository<PRODUCT>
     {
     }
 

@@ -12,6 +12,8 @@ namespace ShopDemoAPI.Data.Infrastructure
 
         void Delete(T entity);
 
+        void Delete(int id);
+
         void DeleteMulti(Expression<Func<T, bool>> where);
 
         T GetSingleById(int id);
@@ -24,7 +26,7 @@ namespace ShopDemoAPI.Data.Infrastructure
 
         IQueryable<T> GetMultiPaging(Expression<Func<T, bool>> filter, out int total, int index = 0, int size = 50, string[] includes = null);
 
-        int count(Expression<Func<T, bool>> where);
+        int Count(Expression<Func<T, bool>> where);
 
         bool CheckContains(Expression<Func<T, bool>> predicate);
     }
