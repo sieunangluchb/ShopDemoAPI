@@ -47,7 +47,15 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Infrastructure\DbFactory.cs" />
+    <Compile Include="Infrastructure\Disposable.cs" />
+    <Compile Include="Infrastructure\IDbFactory.cs" />
+    <Compile Include="Infrastructure\IRepository.cs" />
+    <Compile Include="Infrastructure\IUnitOfWork.cs" />
+    <Compile Include="Infrastructure\RepositoryBase.cs" />
+    <Compile Include="Infrastructure\UnitOfWork.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="ShopDemoAPIDbContext.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
@@ -58,6 +66,13 @@
       <Project>{e91523c8-0dd4-48e1-96da-f56826155628}</Project>
       <Name>ShopDemoAPI.Common</Name>
     </ProjectReference>
+    <ProjectReference Include="..\ShopDemoAPI.Model\ShopDemoAPI.Model.csproj">
+      <Project>{5611e015-3f7d-4479-8304-9ccaa4efd2a1}</Project>
+      <Name>ShopDemoAPI.Model</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Repositories\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
