@@ -7,7 +7,7 @@ namespace ShopDemoAPI.Data.Repositories
     {
     }
 
-    internal class ProductRepository : RepositoryBase<PRODUCT>, IProductRepository
+    public class ProductRepository : RepositoryBase<PRODUCT>, IProductRepository
     {
         public ProductRepository(IDbFactory dbFactory) : base(dbFactory)
         {
