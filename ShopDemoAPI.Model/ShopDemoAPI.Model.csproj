@@ -47,11 +47,31 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Models\FOOTER.cs" />
+    <Compile Include="Models\MENU.cs" />
+    <Compile Include="Models\MENUGROUP.cs" />
+    <Compile Include="Models\ORDER.cs" />
+    <Compile Include="Models\ORDERDETAIL.cs" />
+    <Compile Include="Models\PAGE.cs" />
+    <Compile Include="Models\POST.cs" />
+    <Compile Include="Models\POSTCATEGORY.cs" />
+    <Compile Include="Models\POSTTAG.cs" />
+    <Compile Include="Models\PRODUCT.cs" />
+    <Compile Include="Models\PRODUCTCATEGORY.cs" />
+    <Compile Include="Models\PRODUCTTAG.cs" />
+    <Compile Include="Models\SLIDE.cs" />
+    <Compile Include="Models\SUPPORTONLINE.cs" />
+    <Compile Include="Models\SYSTEMCONFIG.cs" />
+    <Compile Include="Models\TAG.cs" />
+    <Compile Include="Models\VISITORSTATISTIC.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
     <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Abstract\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
