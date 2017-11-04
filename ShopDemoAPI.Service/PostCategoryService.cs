@@ -8,11 +8,11 @@ namespace ShopDemoAPI.Service
 {
     public interface IPostCategoryService
     {
-        void Add(POSTCATEGORY postCategory);
+        POSTCATEGORY Add(POSTCATEGORY postCategory);
 
         void Update(POSTCATEGORY postCategory);
 
-        void Delete(int id);
+        POSTCATEGORY Delete(int id);
 
         IEnumerable<POSTCATEGORY> GetAll();
 
@@ -36,14 +36,14 @@ namespace ShopDemoAPI.Service
             this._unitOfWork = unitOfWork;
         }
 
-        public void Add(POSTCATEGORY postCategory)
+        public POSTCATEGORY Add(POSTCATEGORY postCategory)
         {
-            _postCategoryRepository.Add(postCategory);
+            return _postCategoryRepository.Add(postCategory);
         }
 
-        public void Delete(int id)
+        public POSTCATEGORY Delete(int id)
         {
-            _postCategoryRepository.Delete(id);
+            return _postCategoryRepository.Delete(id);
         }
 
         public IEnumerable<POSTCATEGORY> GetAll()

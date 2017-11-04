@@ -11,9 +11,9 @@ namespace ShopDemoAPI.Service
 {
     public interface IPostService
     {
-        void Add(POST post);
+        POST Add(POST post);
         void Update(POST post);
-        void Delete(int id);
+        POST Delete(int id);
         IEnumerable<POST> GetAll();
         IEnumerable<POST> GetAllPaging(int page, int pageSize, out int totalRow);
         IEnumerable<POST> GetAllByCategoryPaging(int postCategoryId, int page, int pageSize, out int totalRow);
@@ -30,14 +30,14 @@ namespace ShopDemoAPI.Service
             this._postRepository = postRepository;
             this._unitOfWork = unitOfWork;
         }
-        public void Add(POST post)
+        public POST Add(POST post)
         {
-            _postRepository.Add(post);
+            return _postRepository.Add(post);
         }
 
-        public void Delete(int id)
+        public POST Delete(int id)
         {
-            _postRepository.Delete(id);
+            return _postRepository.Delete(id);
         }
 
         public IEnumerable<POST> GetAll()
