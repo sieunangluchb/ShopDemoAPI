@@ -11,7 +11,7 @@ namespace ShopDemoAPI.WebApp.Api
     [RoutePrefix("api/postcategory")]
     public class PostCategoryController : ApiControllerBase
     {
-        IPostCategoryService _postCategoryService;
+        private IPostCategoryService _postCategoryService;
 
         public PostCategoryController(IErrorService errorService, IPostCategoryService postCategoryService) : base(errorService)
         {
@@ -23,17 +23,8 @@ namespace ShopDemoAPI.WebApp.Api
         {
             return CreateHttpResponse(request, () =>
             {
-                HttpResponseMessage response = null;
-                if (ModelState.IsValid)
-                {
-                    request.CreateErrorResponse(HttpStatusCode.BadRequest, ModelState);
-                }
-                else
-                {
-                    var lstPostCategory = _postCategoryService.GetAll();
-
-                    response = request.CreateResponse(HttpStatusCode.OK, lstPostCategory);
-                }
+                var lstPostCategory = _postCategoryService.GetAll();
+                HttpResponseMessage response = request.CreateResponse(HttpStatusCode.OK, lstPostCategory);
                 return response;
             });
         }

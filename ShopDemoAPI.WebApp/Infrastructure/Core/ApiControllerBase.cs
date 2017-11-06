@@ -14,9 +14,9 @@ namespace ShopDemoAPI.WebApp.Infrastructure.Core
     {
         private IErrorService _errorService;
 
-        public ApiControllerBase(IErrorService errorMessage)
+        public ApiControllerBase(IErrorService errorService)
         {
-            this._errorService = errorMessage;
+            this._errorService = errorService;
         }
 
         protected HttpResponseMessage CreateHttpResponse(HttpRequestMessage requestMessage, Func<HttpResponseMessage> function)
