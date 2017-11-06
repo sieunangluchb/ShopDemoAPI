@@ -19,7 +19,7 @@ namespace ShopDemoAPI.Service
         IEnumerable<POST> GetAllByCategoryPaging(int postCategoryId, int page, int pageSize, out int totalRow);
         POST GetById(int id);
         IEnumerable<POST> GetAllByTagPaging(string tag, int page, int pageSize, out int totalRow);
-        void SaveChanges();
+        void Save();
     }
     public class PostService : IPostService
     {
@@ -66,7 +66,7 @@ namespace ShopDemoAPI.Service
             return _postRepository.GetSingleById(id);
         }
 
-        public void SaveChanges()
+        public void Save()
         {
             _unitOfWork.Commit();
         }

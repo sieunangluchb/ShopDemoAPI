@@ -22,7 +22,7 @@ namespace ShopDemoAPI.Service
 
         IEnumerable<POSTCATEGORY> GetAllByTagPaging(string tag, int page, int pageSize, out int totalRow);
 
-        void SaveChanges();
+        void Save();
     }
 
     public class PostCategoryService : IPostCategoryService
@@ -66,9 +66,9 @@ namespace ShopDemoAPI.Service
             return _postCategoryRepository.GetSingleById(id);
         }
 
-        public void SaveChanges()
+        public void Save()
         {
-            throw new NotImplementedException();
+            _unitOfWork.Commit();
         }
 
         public void Update(POSTCATEGORY postCategory)

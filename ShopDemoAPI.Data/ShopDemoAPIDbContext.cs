@@ -32,6 +32,7 @@ namespace ShopDemoAPI.Data
         public DbSet<SYSTEMCONFIG> SYSTEMCONFIGs { get; set; }
         public DbSet<TAG> TAGs { get; set; }
         public DbSet<VISITORSTATISTIC> VISITORSTATISTICs { get; set; }
+        public DbSet<ERROR> ERRORs { get; set; }
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
