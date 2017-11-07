@@ -1,10 +1,13 @@
-﻿using ShopDemoAPI.Model.Models;
+﻿using AutoMapper;
+using ShopDemoAPI.Model.Models;
 using ShopDemoAPI.Service;
 using ShopDemoAPI.WebApp.Infrastructure.Core;
+using ShopDemoAPI.WebApp.Models;
 using System.Collections.Generic;
 using System.Net;
 using System.Net.Http;
 using System.Web.Http;
+using ShopDemoAPI.WebApp.Infrastructure.Extensions;
 
 namespace ShopDemoAPI.WebApp.Api
 {
@@ -24,12 +27,16 @@ namespace ShopDemoAPI.WebApp.Api
             return CreateHttpResponse(request, () =>
             {
                 var lstPostCategory = _postCategoryService.GetAll();
-                HttpResponseMessage response = request.CreateResponse(HttpStatusCode.OK, lstPostCategory);
+
+                var lstPostCategoryVm = Mapper.Map<List<POSTCATEGORYViewModel>>(lstPostCategory);
+                
+                HttpResponseMessage response = request.CreateResponse(HttpStatusCode.OK, lstPostCategoryVm);
                 return response;
             });
         }
 
-        public HttpResponseMessage Post(HttpRequestMessage request, POSTCATEGORY postCategory)
+        [Route("add")]
+        public HttpResponseMessage Post(HttpRequestMessage request, POSTCATEGORYViewModel postCategoryVm)
         {
             return CreateHttpResponse(request, () =>
             {
@@ -40,7 +47,10 @@ namespace ShopDemoAPI.WebApp.Api
                 }
                 else
                 {
-                    var pCategory = _postCategoryService.Add(postCategory);
+                    POSTCATEGORY newPostCategory = new POSTCATEGORY();
+                    newPostCategory.UpdatePostCategory(postCategoryVm);
+
+                    var pCategory = _postCategoryService.Add(newPostCategory);
                     _postCategoryService.Save();
 
                     response = request.CreateResponse(HttpStatusCode.Created, pCategory);
@@ -49,7 +59,8 @@ namespace ShopDemoAPI.WebApp.Api
             });
         }
 
-        public HttpResponseMessage Put(HttpRequestMessage request, POSTCATEGORY postCategory)
+        [Route("update")]
+        public HttpResponseMessage Put(HttpRequestMessage request, POSTCATEGORYViewModel postCategoryVm)
         {
             return CreateHttpResponse(request, () =>
             {
@@ -60,7 +71,10 @@ namespace ShopDemoAPI.WebApp.Api
                 }
                 else
                 {
-                    _postCategoryService.Update(postCategory);
+                    var postCategoryDb = _postCategoryService.GetById(postCategoryVm.ID_POSTCATEGORY);
+                    postCategoryDb.UpdatePostCategory(postCategoryVm);
+
+                    _postCategoryService.Update(postCategoryDb);
                     _postCategoryService.Save();
 
                     response = request.CreateResponse(HttpStatusCode.OK);

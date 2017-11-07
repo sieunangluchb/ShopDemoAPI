@@ -58,6 +58,9 @@
     <Reference Include="Autofac.Integration.WebApi, Version=4.1.0.0, Culture=neutral, PublicKeyToken=17863af14b0044da, processorArchitecture=MSIL">
       <HintPath>..\packages\Autofac.WebApi2.4.1.0\lib\net45\Autofac.Integration.WebApi.dll</HintPath>
     </Reference>
+    <Reference Include="AutoMapper, Version=6.1.1.0, Culture=neutral, PublicKeyToken=be96cd2c38ef1005, processorArchitecture=MSIL">
+      <HintPath>..\packages\AutoMapper.6.1.1\lib\net45\AutoMapper.dll</HintPath>
+    </Reference>
     <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
       <HintPath>..\packages\EntityFramework.6.2.0\lib\net45\EntityFramework.dll</HintPath>
     </Reference>
@@ -191,15 +194,41 @@
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Infrastructure\Core\ApiControllerBase.cs" />
+    <Compile Include="Infrastructure\Extensions\EntityExtensions.cs" />
+    <Compile Include="Mappings\AutoMapperConfiguration.cs" />
+    <Compile Include="Models\ERRORViewModel.cs" />
+    <Compile Include="Models\FOOTERViewModel.cs" />
+    <Compile Include="Models\MENUGROUPViewModel.cs" />
+    <Compile Include="Models\MENUViewModel.cs" />
+    <Compile Include="Models\ORDERDETAILViewModel.cs" />
+    <Compile Include="Models\ORDERViewModel.cs" />
+    <Compile Include="Models\PAGEViewModel.cs" />
+    <Compile Include="Models\POSTCATEGORYViewModel.cs" />
+    <Compile Include="Models\POSTTAGViewModel.cs" />
+    <Compile Include="Models\POSTViewModel.cs" />
+    <Compile Include="Models\PRODUCTCATEGORYViewModel.cs" />
+    <Compile Include="Models\PRODUCTTAGViewModel.cs" />
+    <Compile Include="Models\PRODUCTViewModel.cs" />
+    <Compile Include="Models\SLIDEViewModel.cs" />
+    <Compile Include="Models\SUPPORTONLINEViewModel.cs" />
+    <Compile Include="Models\SYSTEMCONFIGViewModel.cs" />
+    <Compile Include="Models\TAGViewModel.cs" />
+    <Compile Include="Models\VISITORSTATISTICViewModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Content\bootstrap-theme.css" />
+    <Content Include="Content\bootstrap-theme.min.css" />
+    <Content Include="Content\bootstrap.css" />
+    <Content Include="Content\bootstrap.min.css" />
     <Content Include="favicon.ico" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
     <Content Include="ApplicationInsights.config">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
+    <Content Include="Scripts\bootstrap.js" />
+    <Content Include="Scripts\bootstrap.min.js" />
     <Content Include="Web.config" />
     <Content Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
@@ -213,21 +242,18 @@
     <Folder Include="App_Data\" />
     <Folder Include="Asset\admin\" />
     <Folder Include="Asset\client\" />
-    <Folder Include="Infrastructure\Extensions\" />
-    <Folder Include="Models\" />
     <Folder Include="Scripts\plugins\" />
     <Folder Include="Scripts\spa\" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="fonts\glyphicons-halflings-regular.woff2" />
     <Content Include="fonts\glyphicons-halflings-regular.woff" />
-  </ItemGroup>
-  <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.ttf" />
-  </ItemGroup>
-  <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.eot" />
-  </ItemGroup>
-  <ItemGroup>
+    <Content Include="Content\bootstrap.min.css.map" />
+    <Content Include="Content\bootstrap.css.map" />
+    <Content Include="Content\bootstrap-theme.min.css.map" />
+    <Content Include="Content\bootstrap-theme.css.map" />
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>

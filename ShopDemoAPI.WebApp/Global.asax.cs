@@ -1,4 +1,5 @@
-﻿using System;
+﻿using ShopDemoAPI.WebApp.Mappings;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -15,6 +16,10 @@ namespace ShopDemoAPI.WebApp
         {
             AreaRegistration.RegisterAllAreas();
             GlobalConfiguration.Configure(WebApiConfig.Register);
+
+            //Register Automapper
+            AutoMapperConfiguration.Configure();
+
             FilterConfig.RegisterGlobalFilters(GlobalFilters.Filters);
             RouteConfig.RegisterRoutes(RouteTable.Routes);
             BundleConfig.RegisterBundles(BundleTable.Bundles);
