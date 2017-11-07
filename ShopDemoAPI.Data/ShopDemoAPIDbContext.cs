@@ -1,4 +1,5 @@
-﻿using ShopDemoAPI.Model.Models;
+﻿using Microsoft.AspNet.Identity.EntityFramework;
+using ShopDemoAPI.Model.Models;
 using System;
 using System.Collections.Generic;
 using System.Data.Entity;
@@ -8,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace ShopDemoAPI.Data
 {
-    public class ShopDemoAPIDbContext : DbContext
+    public class ShopDemoAPIDbContext : IdentityDbContext<ApplicationUser>
     {
         public ShopDemoAPIDbContext() : base("ShopDemoAPIConnection")
         {
@@ -34,9 +35,15 @@ namespace ShopDemoAPI.Data
         public DbSet<VISITORSTATISTIC> VISITORSTATISTICs { get; set; }
         public DbSet<ERROR> ERRORs { get; set; }
 
+        public static ShopDemoAPIDbContext Create()
+        {
+            return new ShopDemoAPIDbContext();
+        }
+
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
-            
+            modelBuilder.Entity<IdentityUserRole>().HasKey(i => new { i.UserId, i.RoleId });
+            modelBuilder.Entity<IdentityUserLogin>().HasKey(i => i.UserId);
         }
     }
 }

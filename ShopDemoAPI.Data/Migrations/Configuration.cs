@@ -1,5 +1,8 @@
-namespace ShopDemoAPI.Data.Migrations
+﻿namespace ShopDemoAPI.Data.Migrations
 {
+    using Microsoft.AspNet.Identity;
+    using Microsoft.AspNet.Identity.EntityFramework;
+    using ShopDemoAPI.Model.Models;
     using System;
     using System.Data.Entity;
     using System.Data.Entity.Migrations;
@@ -16,16 +19,28 @@ namespace ShopDemoAPI.Data.Migrations
         {
             //  This method will be called after migrating to the latest version.
 
-            //  You can use the DbSet<T>.AddOrUpdate() helper extension method 
-            //  to avoid creating duplicate seed data. E.g.
-            //
-            //    context.People.AddOrUpdate(
-            //      p => p.FullName,
-            //      new Person { FullName = "Andrew Peters" },
-            //      new Person { FullName = "Brice Lambson" },
-            //      new Person { FullName = "Rowan Miller" }
-            //    );
-            //
+            var manager = new UserManager<ApplicationUser>(new UserStore<ApplicationUser>(new ShopDemoAPIDbContext()));
+            var roleManager = new RoleManager<IdentityRole>(new RoleStore<IdentityRole>(new ShopDemoAPIDbContext()));
+
+            var user = new ApplicationUser()
+            {
+                UserName = "NhatMinh",
+                Email = "tinhyeuthienthan1@gmail.com",
+                EmailConfirmed = true,
+                BirthDay = DateTime.Now,
+                FullName = "Võ Hoàng Nhật Minh"
+            };
+
+            manager.Create(user, "123456789");
+
+            if (!roleManager.Roles.Any()) {
+                roleManager.Create(new IdentityRole { Name = "Admin" });
+                roleManager.Create(new IdentityRole { Name = "User" });
+            }
+
+            var adminUser = manager.FindByEmail("tinhyeuthienthan1@gmail.com");
+
+            manager.AddToRoles(adminUser.Id, new string[] { "Admin", "User" });
         }
     }
 }
