@@ -20,8 +20,6 @@ namespace ShopDemoAPI.Service
 
         POSTCATEGORY GetById(int id);
 
-        IEnumerable<POSTCATEGORY> GetAllByTagPaging(string tag, int page, int pageSize, out int totalRow);
-
         void Save();
     }
 
@@ -54,11 +52,6 @@ namespace ShopDemoAPI.Service
         public IEnumerable<POSTCATEGORY> GetAllByParentID(int parentId)
         {
             return _postCategoryRepository.GetMulti(x => x.STATUS && x.PARENT_ID == parentId);
-        }
-
-        public IEnumerable<POSTCATEGORY> GetAllByTagPaging(string tag, int page, int pageSize, out int totalRow)
-        {
-            throw new NotImplementedException();
         }
 
         public POSTCATEGORY GetById(int id)

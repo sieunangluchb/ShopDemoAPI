@@ -1,7 +1,7 @@
 ﻿(function (app) {
-    app.controller('productListontroller', productListontroller);
+    app.controller('productListController', productListController);
 
-    function productListontroller() {
+    function productListController() {
 
     }
 })(angular.module('shopdemoapi.products'));

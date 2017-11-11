@@ -1,5 +1,9 @@
 ﻿(function () {
-    angular.module('shopdemoapi', ['shopdemoapi.products', 'shopdemoapi.common']).config(config);
+    angular.module('shopdemoapi', [
+        'shopdemoapi.products',
+        'shopdemoapi.product_categories',
+        'shopdemoapi.common'
+    ]).config(config);
 
     config.$inject = ['$stateProvider', '$urlRouterProvider'];
 
