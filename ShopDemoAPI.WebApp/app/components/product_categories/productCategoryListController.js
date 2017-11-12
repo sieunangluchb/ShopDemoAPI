@@ -11,10 +11,19 @@
 
         $scope.getProductCategories = getProductCategories;
 
+        $scope.keyword = '';
+
+        $scope.search = search;
+
+        function search() {
+            getProductCategories();
+        }
+
         function getProductCategories(page) {
             page = page || 0;
             var config = {
                 params: {
+                    keyword: $scope.keyword,
                     page: page,
                     pageSize: 20
                 }

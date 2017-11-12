@@ -19,6 +19,8 @@ namespace ShopDemoAPI.Service
 
         IEnumerable<PRODUCTCATEGORY> GetAll();
 
+        IEnumerable<PRODUCTCATEGORY> GetAll(string keyword);
+
         IEnumerable<PRODUCTCATEGORY> GetAllByParentID(int parentId);
 
         PRODUCTCATEGORY GetById(int id);
@@ -50,6 +52,14 @@ namespace ShopDemoAPI.Service
         public IEnumerable<PRODUCTCATEGORY> GetAll()
         {
             return _productCategoryRepository.GetAll();
+        }
+
+        public IEnumerable<PRODUCTCATEGORY> GetAll(string keyword)
+        {
+            if (!string.IsNullOrEmpty(keyword))
+                return _productCategoryRepository.GetMulti(x => x.NAME.Contains(keyword) || x.DESCRIPTION.Contains(keyword));
+            else
+                return _productCategoryRepository.GetAll();
         }
 
         public IEnumerable<PRODUCTCATEGORY> GetAllByParentID(int parentId)
