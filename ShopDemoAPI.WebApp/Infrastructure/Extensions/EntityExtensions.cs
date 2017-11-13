@@ -48,5 +48,25 @@ namespace ShopDemoAPI.WebApp.Infrastructure.Extensions
             post.UPDATEDBY = postVm.UPDATEDBY;
             post.STATUS = postVm.STATUS;
         }
+
+
+        public static void UpdateProductCategory(this PRODUCTCATEGORY productCategory, PRODUCTCATEGORYViewModel productCategoryVm)
+        {
+            productCategory.ID_PRODUCTCATEGORY = productCategoryVm.ID_PRODUCTCATEGORY;
+            productCategory.NAME = productCategoryVm.NAME;
+            productCategory.ALIAS = productCategoryVm.ALIAS;
+            productCategory.DESCRIPTION = productCategoryVm.DESCRIPTION;
+            productCategory.PARENT_ID = productCategoryVm.PARENT_ID;
+            productCategory.DISPLAYORDER = productCategoryVm.DISPLAYORDER;
+            productCategory.IMAGE = productCategoryVm.IMAGE;
+            productCategory.HOMEFLAG = productCategoryVm.HOMEFLAG;
+            productCategory.METAKEYWORD = productCategoryVm.METAKEYWORD;
+            productCategory.METADESCRIPTION = productCategoryVm.METADESCRIPTION;
+            productCategory.CREATEDDAY = productCategoryVm.CREATEDDAY;
+            productCategory.CREATEDBY = productCategoryVm.CREATEDBY;
+            productCategory.UPDATEDDATE = productCategoryVm.UPDATEDDATE;
+            productCategory.UPDATEDBY = productCategoryVm.UPDATEDBY;
+            productCategory.STATUS = productCategoryVm.STATUS;
+        }
     }
 }
