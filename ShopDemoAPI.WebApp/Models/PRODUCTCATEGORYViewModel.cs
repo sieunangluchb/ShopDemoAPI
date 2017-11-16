@@ -10,10 +10,10 @@ namespace ShopDemoAPI.WebApp.Models
     {
         public int ID_PRODUCTCATEGORY { get; set; }
 
-        [Required]
+        [Required(ErrorMessage = "Tên danh mục không được để trống")]
         public string NAME { get; set; }
 
-        [Required]
+        [Required(ErrorMessage = "Tiêu đề seo không được để trống")]
         public string ALIAS { get; set; }
         
         public string DESCRIPTION { get; set; }
@@ -37,8 +37,7 @@ namespace ShopDemoAPI.WebApp.Models
         public DateTime? UPDATEDDATE { get; set; }
 
         public string UPDATEDBY { get; set; }
-
-        [Required]
+        
         public bool STATUS { get; set; }
 
         public virtual IEnumerable<PRODUCTViewModel> PRODUCTs { get; set; }
