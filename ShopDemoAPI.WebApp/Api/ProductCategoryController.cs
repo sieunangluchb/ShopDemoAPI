@@ -17,13 +17,16 @@ namespace ShopDemoAPI.WebApp.Api
     [RoutePrefix("api/productcategory")]
     public class ProductCategoryController : ApiControllerBase
     {
+        #region Initialize
         private IProductCategoryService _productCategoryService;
 
         public ProductCategoryController(IErrorService errorService, IProductCategoryService productCategoryService) : base(errorService)
         {
             this._productCategoryService = productCategoryService;
         }
-        
+
+        #endregion
+
         [Route("getall")]
         [HttpGet]
         public HttpResponseMessage GetAll(HttpRequestMessage request, string keyword, int page, int pageSize = 20)
@@ -54,11 +57,11 @@ namespace ShopDemoAPI.WebApp.Api
         public HttpResponseMessage GetAll(HttpRequestMessage request)
         {
             return CreateHttpResponse(request, () =>
-            {  
+            {
                 var model = _productCategoryService.GetAll();
 
                 var responseData = Mapper.Map<IEnumerable<PRODUCTCATEGORY>, IEnumerable<PRODUCTCATEGORYViewModel>>(model);
-                
+
                 var response = request.CreateResponse(HttpStatusCode.OK, responseData);
                 return response;
             });
@@ -178,13 +181,13 @@ namespace ShopDemoAPI.WebApp.Api
                 {
                     var lstProductCategory = new JavaScriptSerializer().Deserialize<List<int>>(checkedProductCategories);
 
-                    foreach(var item in lstProductCategory)
+                    foreach (var item in lstProductCategory)
                     {
                         _productCategoryService.Delete(item);
                     }
-                    
+
                     _productCategoryService.Save();
-                    
+
                     response = request.CreateResponse(HttpStatusCode.OK, lstProductCategory.Count);
                 }
                 return response;
