@@ -33,7 +33,13 @@
                 console.log('Cannot get list parent');
             });
         }
-
+        $scope.ChooseImage = function () {
+            var finder = new CKFinder();
+            finder.selectActionFunction = function (fileUrl) {
+                $scope.product.IMAGE = fileUrl;
+            }
+            finder.popup();
+        }
         loadproductCategory();
     }
 })(angular.module('shopdemoapi.common'));
