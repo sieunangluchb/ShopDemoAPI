@@ -44,4 +44,4 @@
         loadParentCategory();
         loadProductCategoryDetail();
     }
-})(angular.module('shopdemoapi.common'));
+})(angular.module('shopdemoapi.product_categories'));

@@ -51,6 +51,8 @@ namespace ShopDemoAPI.Model.Models
 
         public int? VIEWCOUNT { get; set; }
 
+        public string TAGS { get; set; }
+
         [ForeignKey("ID_PRODUCTCATEGORY")]
         public virtual PRODUCTCATEGORY PRODUCTCATEGORY { get; set; }
 

@@ -35,6 +35,8 @@ namespace ShopDemoAPI.WebApp.Models
 
         public int? VIEWCOUNT { get; set; }
 
+        public string TAGS { get; set; }
+
         public string METAKEYWORD { get; set; }
 
         public string METADESCRIPTION { get; set; }

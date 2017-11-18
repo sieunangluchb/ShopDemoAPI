@@ -86,6 +86,7 @@ namespace ShopDemoAPI.WebApp.Infrastructure.Extensions
             product.HOMEFLAG = productVm.HOMEFLAG;
             product.HOTFLAG = productVm.HOTFLAG;
             product.VIEWCOUNT = productVm.VIEWCOUNT;
+            product.TAGS = productVm.TAGS;
             product.METAKEYWORD = productVm.METAKEYWORD;
             product.METADESCRIPTION = productVm.METADESCRIPTION;
             product.CREATEDDAY = productVm.CREATEDDAY;

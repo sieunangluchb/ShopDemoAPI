@@ -1,4 +1,5 @@
-﻿using ShopDemoAPI.Data.Infrastructure;
+﻿using ShopDemoAPI.Common;
+using ShopDemoAPI.Data.Infrastructure;
 using ShopDemoAPI.Data.Repositories;
 using ShopDemoAPI.Model.Models;
 using System;
@@ -28,17 +29,47 @@ namespace ShopDemoAPI.Service
     public class ProductService : IProductService
     {
         private IProductRepository _productRepository;
+        private ITagRepository _tagRepository;
+        private IProductTagRepository _productTagRepository;
+
         private IUnitOfWork _unitOfWork;
 
-        public ProductService(IProductRepository productRepository, IUnitOfWork unitOfWork)
+        public ProductService(IProductRepository productRepository, ITagRepository tagRepository, IProductTagRepository productTagRepository, IUnitOfWork unitOfWork)
         {
             this._productRepository = productRepository;
+            this._tagRepository = tagRepository;
+            this._productTagRepository = productTagRepository;
             this._unitOfWork = unitOfWork;
         }
 
-        public PRODUCT Add(PRODUCT PRODUCT)
+        public PRODUCT Add(PRODUCT product)
         {
-            return _productRepository.Add(PRODUCT);
+            var productResult = _productRepository.Add(product);
+            //lưu dữ liệu vào database trước khi lưu tag vì PRODUCTTAG cần ID_PRODUCT
+            _unitOfWork.Commit();
+
+            if (!string.IsNullOrEmpty(product.TAGS))
+            {
+                string[] tags = product.TAGS.Split(',');
+                for (var i = 0; i < tags.Length; i++)
+                {
+                    var tagId = StringHelper.ToUnsignString(tags[i]);
+                    if (_tagRepository.Count(x => x.ID_TAG == tagId) == 0)
+                    {
+                        TAG tag = new TAG();
+                        tag.ID_TAG = tagId;
+                        tag.NAME = tags[i];
+                        tag.TYPE = CommonContants.ProductTag;
+                        _tagRepository.Add(tag);
+                    }
+
+                    PRODUCTTAG productTag = new PRODUCTTAG();
+                    productTag.ID_PRODUCT = product.ID_PRODUCT;
+                    productTag.ID_TAG = tagId;
+                    _productTagRepository.Add(productTag);
+                }
+            }
+            return productResult;
         }
 
         public PRODUCT Delete(int id)
@@ -69,9 +100,31 @@ namespace ShopDemoAPI.Service
             _unitOfWork.Commit();
         }
 
-        public void Update(PRODUCT PRODUCT)
+        public void Update(PRODUCT product)
         {
-            _productRepository.Update(PRODUCT);
+            _productRepository.Update(product);
+
+            if (!string.IsNullOrEmpty(product.TAGS))
+            {
+                string[] tags = product.TAGS.Split(',');
+                for (var i = 0; i < tags.Length; i++)
+                {
+                    var tagId = StringHelper.ToUnsignString(tags[i]);
+                    if (_tagRepository.Count(x => x.ID_TAG == tagId) == 0)
+                    {
+                        TAG tag = new TAG();
+                        tag.ID_TAG = tagId;
+                        tag.NAME = tags[i];
+                        tag.TYPE = CommonContants.ProductTag;
+                        _tagRepository.Add(tag);
+                    }
+                    _productTagRepository.DeleteMulti(x => x.ID_PRODUCT == product.ID_PRODUCT);
+                    PRODUCTTAG productTag = new PRODUCTTAG();
+                    productTag.ID_PRODUCT = product.ID_PRODUCT;
+                    productTag.ID_TAG = tagId;
+                    _productTagRepository.Add(productTag);
+                }
+            }
         }
     }
 }

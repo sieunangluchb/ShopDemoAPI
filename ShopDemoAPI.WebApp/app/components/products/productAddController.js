@@ -1,9 +1,9 @@
 ﻿(function (app) {
     app.controller('productAddController', productAddController);
 
-    productAddController.$inject = ['apiService', '$scope', 'notificationService', '$state'];
+    productAddController.$inject = ['apiService', '$scope', 'notificationService', '$state', 'commonService'];
 
-    function productAddController(apiService, $scope, notificationService, $state) {
+    function productAddController(apiService, $scope, notificationService, $state, commonService) {
         $scope.product = {
             CREATEDDATE: new Date(),
             STATUS: true
@@ -15,6 +15,12 @@
         }
 
         $scope.AddProduct = AddProduct;
+
+        $scope.GetSeoTitle = GetSeoTitle;
+
+        function GetSeoTitle() {
+            $scope.product.ALIAS = commonService.getSeoTitle($scope.product.NAME);
+        }
 
         function AddProduct() {
             apiService.post('/api/product/create', $scope.product,
@@ -42,4 +48,4 @@
         }
         loadproductCategory();
     }
-})(angular.module('shopdemoapi.common'));
+})(angular.module('shopdemoapi.products'));
