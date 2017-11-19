@@ -10,6 +10,8 @@
             language: 'vi',
             height: '200px'
         }
+        
+        $scope.moreImages = [];
 
         $scope.UpdateProduct = UpdateProduct;
 
@@ -22,12 +24,15 @@
         function loadProductDetail() {
             apiService.get('/api/product/getbyid/' + $stateParams.id, null, function (result) {
                 $scope.product = result.data;
+                //JSON.parse sẽ cho ra json dạng mảng
+                $scope.moreImages = JSON.parse($scope.product.MOREIMAGES);
             }, function (error) {
                 notificationService.displayError(error.data);
             });
         }
 
         function UpdateProduct() {
+            $scope.product.MOREIMAGES = JSON.stringify($scope.moreImages);
             apiService.put('/api/product/update', $scope.product,
                 function (result) {
                     notificationService.displaySuccess(result.data.NAME + ' đã được cập nhật.');
@@ -47,10 +52,23 @@
         $scope.ChooseImage = function () {
             var finder = new CKFinder();
             finder.selectActionFunction = function (fileUrl) {
-                $scope.product.IMAGE = fileUrl;
+                $scope.$apply(function () {
+                    $scope.product.IMAGE = fileUrl;
+                })
             }
             finder.popup();
         }
+
+        $scope.ChooseMoreImage = function () {
+            var finder = new CKFinder();
+            finder.selectActionFunction = function (fileUrl) {
+                $scope.$apply(function () {
+                    $scope.moreImages.push(fileUrl);
+                })
+            }
+            finder.popup();
+        }
+
         loadproductCategory();
         loadProductDetail();
     }
