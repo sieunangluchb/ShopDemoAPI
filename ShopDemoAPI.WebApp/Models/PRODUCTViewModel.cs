@@ -55,6 +55,6 @@ namespace ShopDemoAPI.WebApp.Models
 
         public virtual IEnumerable<ORDERDETAILViewModel> ORDERDETAILs { get; set; }
 
-        public virtual IEnumerable<PRODUCTTAGViewModel> PRODUCTTAGs { get; set; }
+        //public virtual IEnumerable<PRODUCTTAGViewModel> PRODUCTTAGs { get; set; }
     }
 }

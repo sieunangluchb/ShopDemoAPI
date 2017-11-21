@@ -16,6 +16,7 @@ namespace ShopDemoAPI.WebApp.Api
 {
 
     [RoutePrefix("api/product")]
+    [Authorize]
     public class ProductController : ApiControllerBase
     {
         #region Initialize
@@ -101,6 +102,7 @@ namespace ShopDemoAPI.WebApp.Api
                     newProduct.UpdateProduct(productVm);
 
                     newProduct.CREATEDDAY = DateTime.Now;
+                    newProduct.CREATEDBY = User.Identity.Name;
 
                     _productService.Add(newProduct);
                     _productService.Save();
@@ -129,7 +131,10 @@ namespace ShopDemoAPI.WebApp.Api
                 {
                     var dbProduct = _productService.GetById(productVm.ID_PRODUCT);
                     dbProduct.UpdateProduct(productVm);
+
                     dbProduct.UPDATEDDATE = DateTime.Now;
+                    dbProduct.UPDATEDBY = User.Identity.Name;
+
                     _productService.Update(dbProduct);
                     _productService.Save();
 

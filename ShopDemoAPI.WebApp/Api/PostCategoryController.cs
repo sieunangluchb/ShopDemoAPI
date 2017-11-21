@@ -8,10 +8,12 @@ using System.Net;
 using System.Net.Http;
 using System.Web.Http;
 using ShopDemoAPI.WebApp.Infrastructure.Extensions;
+using System;
 
 namespace ShopDemoAPI.WebApp.Api
 {
     [RoutePrefix("api/postcategory")]
+    [Authorize]
     public class PostCategoryController : ApiControllerBase
     {
         private IPostCategoryService _postCategoryService;
@@ -50,6 +52,9 @@ namespace ShopDemoAPI.WebApp.Api
                     POSTCATEGORY newPostCategory = new POSTCATEGORY();
                     newPostCategory.UpdatePostCategory(postCategoryVm);
 
+                    newPostCategory.CREATEDDAY = DateTime.Now;
+                    newPostCategory.CREATEDBY = User.Identity.Name;
+
                     var pCategory = _postCategoryService.Add(newPostCategory);
                     _postCategoryService.Save();
 
@@ -73,6 +78,9 @@ namespace ShopDemoAPI.WebApp.Api
                 {
                     var postCategoryDb = _postCategoryService.GetById(postCategoryVm.ID_POSTCATEGORY);
                     postCategoryDb.UpdatePostCategory(postCategoryVm);
+
+                    postCategoryDb.UPDATEDDATE = DateTime.Now;
+                    postCategoryDb.UPDATEDBY = User.Identity.Name;
 
                     _postCategoryService.Update(postCategoryDb);
                     _postCategoryService.Save();
